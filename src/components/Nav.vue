@@ -1,14 +1,27 @@
 <template>
   <!-- 底部导航栏 -->
-  <mu-bottom-nav>
+  <mu-bottom-nav :value="navValue" @change="onChange">
     <mu-bottom-nav-item
+      value="main"
       title="主页"
-      icon=":iconfont icon-home"
-    ></mu-bottom-nav-item>
+      icon=":iconfont icon-sousuo"
+      to="/main"
+    >
+    </mu-bottom-nav-item>
     <mu-bottom-nav-item
+      value="boooks"
+      title="书库"
+      icon=":iconfont icon-shuku"
+      to="/books"
+    >
+    </mu-bottom-nav-item>
+    <mu-bottom-nav-item
+      value="mine"
       title="我的"
       icon=":iconfont icon-user"
-    ></mu-bottom-nav-item>
+      to="/mine"
+    >
+    </mu-bottom-nav-item>
   </mu-bottom-nav>
 </template>
 
@@ -19,7 +32,23 @@ import { BottomNav } from "muse-ui";
 
 // 使用组件
 Vue.use(BottomNav);
-export default {};
+export default {
+  data() {
+    // 默认显示的路径
+    const defaultPath = this.$route.path;
+    // 默认路径的value
+    const defaultValue = defaultPath.slice(1);
+    return {
+      navValue: defaultValue
+    };
+  },
+  methods: {
+    onChange(val) {
+      // 修改展示的value为当前的点击对象
+      this.navValue = val;
+    }
+  }
+};
 </script>
 
 <style>

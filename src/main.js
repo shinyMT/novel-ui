@@ -5,8 +5,9 @@ import App from './App'
 import router from './router'
 import './assets/fonts/back/iconfont.css'
 import "muse-ui/dist/muse-ui.css";
-import './assets/fonts/home/iconfont.css'
+import './assets/fonts/search/iconfont.css'
 import './assets/fonts/user/iconfont.css'
+import './assets/fonts/library/iconfont.css'
 
 Vue.config.productionTip = false
 

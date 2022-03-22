@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Reset from '@/components/Reset'
 import Main from '@/components/Main'
+import Mine from '@/components/Mine'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/main',
       name: 'Main',
       component: Main
+    },
+    {
+      path: '/mine',
+      name: 'Mine',
+      component: Mine
     }
   ]
 })

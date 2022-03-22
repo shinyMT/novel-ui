@@ -6,11 +6,11 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "4766685",
-      "name": "home",
-      "font_class": "home",
-      "unicode": "e7c6",
-      "unicode_decimal": 59334
+      "icon_id": "11372706",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e8b9",
+      "unicode_decimal": 59577
     }
   ]
 }
