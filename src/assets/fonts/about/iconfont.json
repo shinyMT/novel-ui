@@ -1,0 +1,16 @@
+{
+  "id": "3257130",
+  "name": "novel",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11372707",
+      "name": "叹号",
+      "font_class": "guanyu",
+      "unicode": "e8ba",
+      "unicode_decimal": 59578
+    }
+  ]
+}

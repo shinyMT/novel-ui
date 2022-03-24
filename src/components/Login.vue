@@ -97,7 +97,7 @@ export default {
             // 设置延时跳转
             clearTimeout(that.timer);
             that.timer = setTimeout(() => {
-              commonMethod.openWindow(that.$router, "Main");
+              commonMethod.openWindow(that.$router, "Main", account);
             }, 2000);
           } else if (data.code < 0) {
             Toast.error("账号或密码错误");

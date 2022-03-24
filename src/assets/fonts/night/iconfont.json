@@ -1,0 +1,16 @@
+{
+  "id": "3257130",
+  "name": "novel",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "398281",
+      "name": "夜间模式",
+      "font_class": "yejianmoshi",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    }
+  ]
+}

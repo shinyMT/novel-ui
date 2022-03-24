@@ -68,7 +68,8 @@ export default {
       linear: 0,
       showProgress: false,
       progressTimer: 0,
-      timer: 0
+      timer: 0,
+      username: this.$route.params.username
     };
   },
   methods: {

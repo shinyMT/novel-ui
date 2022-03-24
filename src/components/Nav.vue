@@ -5,21 +5,21 @@
       value="main"
       title="主页"
       icon=":iconfont icon-sousuo"
-      to="/main"
+      :to="mainObj"
     >
     </mu-bottom-nav-item>
     <mu-bottom-nav-item
-      value="boooks"
+      value="books"
       title="书库"
       icon=":iconfont icon-shuku"
-      to="/books"
+      :to="booksObj"
     >
     </mu-bottom-nav-item>
     <mu-bottom-nav-item
       value="mine"
       title="我的"
       icon=":iconfont icon-user"
-      to="/mine"
+      :to="mineObj"
     >
     </mu-bottom-nav-item>
   </mu-bottom-nav>
@@ -39,7 +39,25 @@ export default {
     // 默认路径的value
     const defaultValue = defaultPath.slice(1);
     return {
-      navValue: defaultValue
+      navValue: defaultValue,
+      mainObj: {
+        name: "Main",
+        params: {
+          username: this.$route.params.username
+        }
+      },
+      booksObj: {
+        name: "Books",
+        params: {
+          username: this.$route.params.username
+        }
+      },
+      mineObj: {
+        name: "Mine",
+        params: {
+          username: this.$route.params.username
+        }
+      }
     };
   },
   methods: {

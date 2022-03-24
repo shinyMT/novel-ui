@@ -8,6 +8,9 @@ import "muse-ui/dist/muse-ui.css";
 import './assets/fonts/search/iconfont.css'
 import './assets/fonts/user/iconfont.css'
 import './assets/fonts/library/iconfont.css'
+import './assets/fonts/setting/iconfont.css'
+import './assets/fonts/about/iconfont.css'
+import './assets/fonts/night/iconfont.css'
 
 Vue.config.productionTip = false
 
