@@ -41,22 +41,25 @@ export default {
     return {
       navValue: defaultValue,
       mainObj: {
-        name: "Main",
-        params: {
-          username: this.$route.params.username
-        }
+        name: "Main"
+        // params: {
+        //   username: this.$route.params.username,
+        //   userId: this.$route.params.userId
+        // }
       },
       booksObj: {
-        name: "Books",
-        params: {
-          username: this.$route.params.username
-        }
+        name: "Books"
+        // params: {
+        //   username: this.$route.params.username,
+        //   userId: this.$route.params.userId
+        // }
       },
       mineObj: {
-        name: "Mine",
-        params: {
-          username: this.$route.params.username
-        }
+        name: "Mine"
+        // params: {
+        //   username: this.$route.params.username,
+        //   userId: this.$route.params.userId
+        // }
       }
     };
   },

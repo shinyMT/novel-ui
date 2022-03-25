@@ -1,11 +1,12 @@
 export default{
     // 封装一个跳转到其他页面的方法
-    openWindow(routeName, targetPage, username){
+    openWindow(routeName, targetPage){
         routeName.push({
             name: targetPage,
-			params: {
-				username: username
-			}
+			// params: {
+			// 	username: username,
+			// 	userId: userId
+			// }
         })
     },
     // 设置非空验证

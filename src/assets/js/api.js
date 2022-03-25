@@ -21,8 +21,11 @@ var sBaseApi = envIsProduct ? apiProd : apiTest
  // 添加书籍
  var apiAddBook = sBaseApi + "/book/add"
 
- // 获取书籍
+ // 爬取书籍
  var apiGetBook = sBaseApi + "/book/get"
+
+ // 获取书籍列表
+ var apiGetBookList = sBaseApi + "/book/list"
 
 
  export default{
@@ -30,5 +33,6 @@ var sBaseApi = envIsProduct ? apiProd : apiTest
      apiRegister,
      apiResetPwd,
      apiAddBook,
-     apiGetBook
+     apiGetBook,
+     apiGetBookList
  }

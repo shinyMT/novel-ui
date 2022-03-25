@@ -90,14 +90,20 @@ export default {
         let that = this;
         var result = httpUtil.post(api.apiLogin, bodyData);
         result.then(function(res) {
-          // console.log(res);
           const data = res.data;
+          console.log(data);
           if (data.code == 0) {
             Toast.success("登录成功");
+            // 将用户信息存入session中
+            window.sessionStorage.setItem("userName", data.data[0].name);
+            window.sessionStorage.setItem("userId", data.data[0].id);
+            // 获取用户id
+            // var userId = data.data[0].id;
             // 设置延时跳转
             clearTimeout(that.timer);
             that.timer = setTimeout(() => {
-              commonMethod.openWindow(that.$router, "Main", account);
+              // commonMethod.openWindow(that.$router, "Main", account, userId);
+              commonMethod.openWindow(that.$router, "Main");
             }, 2000);
           } else if (data.code < 0) {
             Toast.error("账号或密码错误");
