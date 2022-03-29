@@ -63,7 +63,8 @@ export default {
     return {
       portraitImg: portraitImg,
       // username: this.$route.params.username
-      username: window.sessionStorage.getItem("userName")
+      username: window.sessionStorage.getItem("userName"),
+      userId: window.sessionStorage.getItem("userId")
     };
   }
 };

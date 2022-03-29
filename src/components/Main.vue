@@ -1,6 +1,28 @@
 <template>
   <div>
     <div class="centerContainer">
+      <p class="tip">书籍名称</p>
+      <div class="inputBox">
+        <input
+          v-model="bookName"
+          id="bookName"
+          type="bookName"
+          class="input-sytle"
+          placeholder="例: 离谱"
+          autocomplete="off"
+        />
+      </div>
+      <p class="tip">书籍作者</p>
+      <div class="inputBox">
+        <input
+          v-model="bookAuthor"
+          id="bookAuthor"
+          type="bookAuthor"
+          class="input-sytle"
+          placeholder="例: 热死了"
+          autocomplete="off"
+        />
+      </div>
       <p class="tip">书籍地址</p>
       <div class="inputBox">
         <input
@@ -65,11 +87,14 @@ export default {
     return {
       bookUrl: "",
       totalChapter: "",
+      bookName: "",
+      bookAuthor: "",
       linear: 0,
       showProgress: false,
       progressTimer: 0,
       timer: 0,
-      username: this.$route.params.username
+      username: this.$route.params.username,
+      userId: window.sessionStorage.getItem("userId")
     };
   },
   methods: {
@@ -82,6 +107,10 @@ export default {
         // if (bookURl != null && totalChapter != null) {
         var bodyData = new URLSearchParams();
         bodyData.append("totalChapter", totalChapter);
+        bodyData.append("userId", this.userId);
+        bodyData.append("bookName", this.bookName);
+        bodyData.append("bookAuthor", this.bookAuthor);
+        bodyData.append("bookUrl", this.bookUrl);
         // 发起请求
         var result = httpUtil.post(api.apiGetBook, bodyData);
         // 展示进度条
@@ -132,7 +161,7 @@ export default {
 .centerContainer {
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 10%;
   left: 0;
   right: 0;
   margin: auto;

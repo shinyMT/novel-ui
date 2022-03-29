@@ -27,7 +27,6 @@ import Vue from "vue";
 import httpUtil from "../assets/js/http_util";
 import api from "../assets/js/api";
 import commonMethod from "../assets/js/common";
-import Epub from "epubjs"
 
 // 使用组件
 Vue.use(GridList);
@@ -35,7 +34,6 @@ Vue.use(SubHeader);
 Vue.prototype.httpUtil = httpUtil;
 Vue.prototype.api = api;
 Vue.prototype.commonMethod = commonMethod;
-Vue.use(Epub)
 
 export default {
   components: {
@@ -66,7 +64,9 @@ export default {
     },
     // 点击跳转到书籍阅读页
     toBookDetail(bookPath) {
-      
+      // console.log(bookPath);
+      var bodyMap = { bookPath: bookPath };
+      commonMethod.openWindow(this.$router, "DetailBook", bodyMap);
     }
   },
   created() {

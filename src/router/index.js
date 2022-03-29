@@ -6,6 +6,7 @@ import Reset from '@/components/Reset'
 import Main from '@/components/Main'
 import Mine from '@/components/Mine'
 import Books from '@/components/Books'
+import DetailBook from '@/components/DetailBook'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/books',
       name: 'Books',
       component: Books
+    },
+    {
+      path: '/detailBook',
+      name: 'DetailBook',
+      component: DetailBook
     }
   ]
 })
