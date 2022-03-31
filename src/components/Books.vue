@@ -9,7 +9,7 @@
           :key="index"
           @click="toBookDetail(tile.bookPath)"
         >
-          <img src="" />
+          <img src="../assets/logo.png" />
           <span slot="title">{{ tile.bookName }}</span>
         </mu-grid-tile>
       </mu-grid-list>
@@ -27,7 +27,6 @@ import Vue from "vue";
 import httpUtil from "../assets/js/http_util";
 import api from "../assets/js/api";
 import commonMethod from "../assets/js/common";
-import Epub from "epubjs"
 
 // 使用组件
 Vue.use(GridList);
@@ -35,7 +34,6 @@ Vue.use(SubHeader);
 Vue.prototype.httpUtil = httpUtil;
 Vue.prototype.api = api;
 Vue.prototype.commonMethod = commonMethod;
-Vue.use(Epub)
 
 export default {
   components: {
@@ -59,6 +57,7 @@ export default {
       var resutl = httpUtil.post(api.apiGetBookList, bodyMap);
       resutl.then(function(res) {
         var data = res.data;
+        console.log(data)
         if (data.code == 0) {
           that.bookList = data.data;
         }
@@ -66,7 +65,10 @@ export default {
     },
     // 点击跳转到书籍阅读页
     toBookDetail(bookPath) {
-      
+      const paramsMap = {
+        bookPath: bookPath
+      }
+      commonMethod.openWindow(this.$router, 'BookDetail', paramsMap)
     }
   },
   created() {

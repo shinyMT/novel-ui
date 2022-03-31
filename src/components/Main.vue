@@ -23,6 +23,28 @@
           autocomplete="off"
         />
       </div>
+      <p class="tip">书籍名称</p>
+      <div class="inputBox">
+        <input
+          v-model="bookName"
+          id="bookName"
+          type="bookName"
+          class="input-sytle"
+          placeholder="例: 明朝其实很有趣"
+          autocomplete="off"
+        />
+      </div>
+      <p class="tip">书籍作者</p>
+      <div class="inputBox">
+        <input
+          v-model="bookAuthor"
+          id="bookAuthor"
+          type="bookAuthor"
+          class="input-sytle"
+          placeholder="例: 热到昏阙"
+          autocomplete="off"
+        />
+      </div>
       <div class="mui-content-padded">
         <button id="submitInfo" class="btn-primary" @click="submitInfo">
           提交
@@ -65,6 +87,8 @@ export default {
     return {
       bookUrl: "",
       totalChapter: "",
+      bookName: "",
+      bookAuthor: "",
       linear: 0,
       showProgress: false,
       progressTimer: 0,
@@ -78,10 +102,15 @@ export default {
       // 获取参数
       const bookURl = this.bookUrl;
       const totalChapter = this.totalChapter;
-      if (totalChapter != null) {
-        // if (bookURl != null && totalChapter != null) {
+      const bookName = this.bookName;
+      const bookAuthor = this.bookAuthor
+      if (totalChapter != null && bookURl != null && bookName != null) {
         var bodyData = new URLSearchParams();
         bodyData.append("totalChapter", totalChapter);
+        bodyData.append("bookUrl", bookURl);
+        bodyData.append("bookName", bookName)
+        bodyData.append("userId", window.sessionStorage.getItem('userId'))
+        bodyData.append("bookAuthor", bookAuthor)
         // 发起请求
         var result = httpUtil.post(api.apiGetBook, bodyData);
         // 展示进度条
@@ -122,6 +151,8 @@ export default {
             }
           }
         });
+      }else{
+        Toast.msgWarn("三个输入框的信息都不能为空");
       }
     }
   }
