@@ -1,5 +1,6 @@
 export default{
     // 封装一个跳转到其他页面的方法
+
     openWindow(routeName, targetPage, paramObj){
         routeName.push({
             name: targetPage,

@@ -29,6 +29,7 @@ var sBaseApi = envIsProduct ? apiProd : apiTest
 
 
  export default{
+     sBaseApi,
      apiLogin,
      apiRegister,
      apiResetPwd,
