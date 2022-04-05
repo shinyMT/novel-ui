@@ -2,6 +2,11 @@
     <div class="page">
         <!-- 顶部导航栏 -->
         <mu-appbar style="width: 100%; position:absolute" id="appBar" >
+            <!-- 返回按钮 -->
+            <mu-button icon slot="left" @click="backToLastPage">
+                <mu-icon value=":iconfont icon-fanhui"></mu-icon>
+            </mu-button>
+            <!-- 目录按钮 -->
             <mu-button icon slot="left" @click="toDic">
                 <mu-icon value="menu"></mu-icon>
             </mu-button>
@@ -70,7 +75,8 @@ import "jszip"
 import { AppBar, Popover, List, Progress, Drawer } from "muse-ui"
 import http_util from '../assets/js/http_util'
 import api from "../assets/js/api"
-const bookUrl = 'http://localhost:8085/novel/yuqingkedai.epub'
+import Toast from "muse-ui-toast"
+// const bookUrl = 'http://localhost:8085/novel/yuqingkedai.epub'
 
 // 使用组件
 Vue.use(Epub)
@@ -80,6 +86,7 @@ Vue.use(List)
 Vue.use(Progress)
 Vue.prototype.api = api
 Vue.use(Drawer)
+Vue.use(Toast)
 
 export default {
     data(){
@@ -103,10 +110,33 @@ export default {
             sectionList: []
         }
     },
+    created(){
+        // 在渲染book之前获取当前书籍的阅读进度
+        var result = this.getProgress()
+        var that = this
+        result.then(res => {
+                // console.log(res)
+                if(res == -600){
+                    Toast.erro("当前网络异常，请稍后重试")
+                }else{
+                    const data = res.data
+                    if(data.code == 0){
+                        window.sessionStorage.setItem('progress', data.data[0].bookProgress)
+                        // console.log(window.sessionStorage.getItem('progress'))
+                        // 获取进度成功后再渲染书籍
+                        that.showEpub()
+                    }else{
+                        Toast.warning("获取进度失败，请稍后重试")
+                    }
+                }
+            })
+    },
     mounted(){
-        this.showEpub()
+        // this.showEpub()
         // this.initPaging()
         this.trigger = this.$refs.button.$el
+        // 监听返回事件
+        window.addEventListener('popstate', this.backToLastPage, false)
     },
     methods:{
         showEpub(){
@@ -115,8 +145,8 @@ export default {
             const splitBookPath = "/" + bookPath[2] + "/" + bookPath[3]
             // console.log("书籍路径：" + splitBookPath)
             // 生成book对象
-            // this.book = new Epub(api.apiTest + splitBookPath)
-            this.book = new Epub(bookUrl)
+            this.book = new Epub(api.apiTest + splitBookPath)
+            // this.book = new Epub(bookUrl)
             // console.log(this.book)
             this.rendition = this.book.renderTo("read", {
                 width: window.innerWidth,
@@ -124,7 +154,7 @@ export default {
                 method: 'default'
             })
             // 获取当前书籍的进度
-            const bookProgress = window.localStorage.getItem('progress')
+            const bookProgress = window.sessionStorage.getItem('progress')
             console.log(bookProgress)
             if(bookProgress != null){
                 // 有进度则带着进度渲染同时更新进度条
@@ -174,6 +204,7 @@ export default {
             if(this.rendition){
                 var that = this
                 this.rendition.prev().then(() => {
+                    // 翻页的时候刷新进度条
                     that.refreshLocation()
                 })
             }
@@ -286,7 +317,7 @@ export default {
                 // console.log(currentLocation.start.cfi)
                 const currentPercentage = (this.book.locations.percentageFromCfi(currentLocation.start.cfi).toFixed(5) * 10000) / 100;
                 
-                // console.log(currentPercentage)   
+                // console.log(currentLocation.start.cfi)   
                 // this.progress = currentProgress;
                 this.onProgressInput(currentPercentage)
                 // 刷新完成后保存进度
@@ -313,7 +344,41 @@ export default {
             }else{
                 return true
             }
+        },
+        addProgressToWeb(progress){
+            var that = this
+            var bodyMap = new URLSearchParams()
+            bodyMap.append('userId', window.sessionStorage.getItem('userId'))
+            bodyMap.append('bookId', this.$route.params.bookId)
+            bodyMap.append('progress', progress)
+            var result = http_util.post(api.apiSaveProgress, bodyMap)
+            result.then(res => {
+                console.log(res)
+                const data = res.data
+                if(data.code == 0){
+                    that.$router.go(-1)
+                }else{
+                    Toast.warning("当前退出可能导致阅读进度保存失败，请稍后重试")
+                }
+            })
+        },
+        backToLastPage(){
+            // 在返回时将当前最新的阅读进度保存到服务器中
+            this.addProgressToWeb(window.localStorage.getItem('progress'))
+        },
+        getProgress(){
+            // 从服务器上获取当前书籍的阅读进度
+            var bodyMap = new URLSearchParams()
+            bodyMap.append('userId', window.sessionStorage.getItem('userId'))
+            bodyMap.append('bookId', this.$route.params.bookId)
+            var result = http_util.post(api.apiGetProgress, bodyMap)
+            
+            return result
         }
+    },
+    destroyed(){
+        // 在页面销毁时移除监听事件
+        window.removeEventListener('popstate', this.backToLastPage, false)
     }
 }
 </script>

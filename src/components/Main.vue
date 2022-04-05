@@ -45,28 +45,7 @@
           autocomplete="off"
         />
       </div>
-      <p class="tip">书籍名称</p>
-      <div class="inputBox">
-        <input
-          v-model="bookName"
-          id="bookName"
-          type="bookName"
-          class="input-sytle"
-          placeholder="例: 明朝其实很有趣"
-          autocomplete="off"
-        />
-      </div>
-      <p class="tip">书籍作者</p>
-      <div class="inputBox">
-        <input
-          v-model="bookAuthor"
-          id="bookAuthor"
-          type="bookAuthor"
-          class="input-sytle"
-          placeholder="例: 热到昏阙"
-          autocomplete="off"
-        />
-      </div>
+    
       <div class="mui-content-padded">
         <button id="submitInfo" class="btn-primary" @click="submitInfo">
           提交
@@ -156,8 +135,10 @@ export default {
           } else {
             var data = res.data;
             if (data.code == 0) {
-              Toast.success("获取成功，请到D盘下查看");
-            } else {
+              Toast.success("获取成功，请到书架中查看");
+            } else if(data.code == -501){
+              Toast.warning("该书籍在书库中已经存在")
+            }else{
               Toast.error("获取失败，请稍后重试或者联系管理员");
             }
             // 将进度条拉到100表示获取完毕，1s后再隐藏进度条

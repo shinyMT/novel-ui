@@ -27,6 +27,12 @@ var sBaseApi = envIsProduct ? apiProd : apiTest
  // 获取书籍列表
  var apiGetBookList = sBaseApi + "/book/list"
 
+ // 保存阅读进度
+ var apiSaveProgress = sBaseApi + "/add/progress"
+
+ // 获取当前用户当前书籍的阅读进度
+ var apiGetProgress = sBaseApi + "/get/progress"
+
 
  export default{
      apiTest,
@@ -36,5 +42,7 @@ var sBaseApi = envIsProduct ? apiProd : apiTest
      apiResetPwd,
      apiAddBook,
      apiGetBook,
-     apiGetBookList
+     apiGetBookList,
+     apiSaveProgress,
+     apiGetProgress
  }

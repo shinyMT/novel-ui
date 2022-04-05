@@ -7,7 +7,7 @@
         <mu-grid-tile
           v-for="(tile, index) in bookList"
           :key="index"
-          @click="toBookDetail(tile.bookPath)"
+          @click="toBookDetail(tile.bookPath, tile.id)"
         >
           <img src="../assets/logo.png" />
           <span slot="title">{{ tile.bookName }}</span>
@@ -64,9 +64,10 @@ export default {
       });
     },
     // 点击跳转到书籍阅读页
-    toBookDetail(bookPath) {
+    toBookDetail(bookPath, bookId) {
       const paramsMap = {
-        bookPath: bookPath
+        bookPath: bookPath,
+        bookId: bookId
       }
       commonMethod.openWindow(this.$router, 'BookDetail', paramsMap)
     }
