@@ -2,7 +2,7 @@
 # Author: thy
 # MAINTAINER: shinyMT@163.com
 
-FROM node:10
+FROM node:17
 
 COPY ./ /novel-vue
 WORKDIR /novel-vue
