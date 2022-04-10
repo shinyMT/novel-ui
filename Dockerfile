@@ -10,4 +10,4 @@ RUN rm /etc/nginx/conf.d/default.conf
 ADD nginx.conf /etc/nginx/conf.d/
 
 # 将根目录下的dist文件夹复制到镜像中
-COPY dist/ /usr/share/nginx/html/
+COPY ./dist/ /usr/share/nginx/html/
