@@ -125,8 +125,11 @@ export default {
                         // console.log(window.sessionStorage.getItem('progress'))
                         // 获取进度成功后再渲染书籍
                         that.showEpub()
+                        
                     }else{
-                        Toast.warning("获取进度失败，请稍后重试")
+                        // 为空说明是新书，则从头开始渲染
+                        window.sessionStorage.setItem('progress', '')
+                        that.showEpub()
                     }
                 }
             })
@@ -156,7 +159,7 @@ export default {
             // 获取当前书籍的进度
             const bookProgress = window.sessionStorage.getItem('progress')
             console.log(bookProgress)
-            if(bookProgress != null){
+            if(bookProgress != ''){
                 // 有进度则带着进度渲染同时更新进度条
                 this.rendition.display(bookProgress)
             }else{

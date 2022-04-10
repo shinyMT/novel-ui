@@ -119,7 +119,7 @@ export default {
         that.showProgress = true;
         // 开启进度条计时
         this.progressTimer = setInterval(() => {
-          this.linear += 10;
+          this.linear += 4;
           if (this.linear > 100) {
             this.linear = 0;
           }
