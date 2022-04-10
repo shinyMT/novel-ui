@@ -1,6 +1,6 @@
 <template>
   <!-- 底部导航栏 -->
-  <mu-bottom-nav :value="navValue" @change="onChange">
+  <mu-bottom-nav style="position:absolute; width:100%; bottom:0;" :value="navValue" @change="onChange">
     <mu-bottom-nav-item
       value="main"
       title="主页"
@@ -29,9 +29,12 @@
 // 引入组件
 import Vue from "vue";
 import { BottomNav } from "muse-ui";
+import commonStyle from "../assets/css/common.css"
 
 // 使用组件
 Vue.use(BottomNav);
+Vue.prototype.commonStyle = commonStyle
+
 export default {
   data() {
     // 默认显示的路径
@@ -49,17 +52,9 @@ export default {
       },
       booksObj: {
         name: "Books"
-        // params: {
-        //   username: this.$route.params.username,
-        //   userId: this.$route.params.userId
-        // }
       },
       mineObj: {
         name: "Mine"
-        // params: {
-        //   username: this.$route.params.username,
-        //   userId: this.$route.params.userId
-        // }
       }
     };
   },
@@ -72,10 +67,3 @@ export default {
 };
 </script>
 
-<style>
-.mu-bottom-nav {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-}
-</style>

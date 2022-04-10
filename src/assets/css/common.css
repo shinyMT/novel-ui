@@ -105,3 +105,15 @@
   color: #bbb;
   padding: 0px 8px;
 }
+
+/* 公共链接字体样式 */
+.linkStyle {
+  color: #007aff;
+}
+
+/* 公共底部导航栏样式 */
+.mu-bottom-nav{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}

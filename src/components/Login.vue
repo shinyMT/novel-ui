@@ -32,9 +32,9 @@
                 登录
               </button>
               <div class="link-area">
-                <a id="reg" @click="register">注册账号</a>
+                <a class="linkStyle" id="reg" @click="register">注册账号</a>
                 <span class="spliter"> | </span>
-                <a id="forgetPassword" @click="forgetPwd">忘记密码</a>
+                <a class="linkStyle" id="forgetPassword" @click="forgetPwd">忘记密码</a>
               </div>
             </div>
           </div>
@@ -127,8 +127,5 @@ export default {
 article {
   width: 90%;
   height: 300px;
-}
-a {
-  color: #007aff;
 }
 </style>
