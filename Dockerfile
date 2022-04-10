@@ -2,13 +2,12 @@
 # Author: thy
 # MAINTAINER: shinyMT@163.com
 
-FROM node:17
-
-COPY ./ /novel-vue
-WORKDIR /novel-vue
-RUN npm install && npm run build
-
 FROM nginx
-RUN mkdir /novel-vue
-COPY --from=0 /novel-vue/dist /novel-vue
-COPY nginx.conf /etc/nginx/nginx.conf
+# 删除目录下的default.conf
+RUN rm /etc/nginx/conf.d/default.conf
+
+# 将default.conf复制到指定目录下，用本地的default.conf来替换默认的文件
+ADD default.conf /etc/nginx/conf.d/
+
+# 将根目录下的dist文件夹复制到镜像中
+COPY dist/ /usr/share/nginx/html/
