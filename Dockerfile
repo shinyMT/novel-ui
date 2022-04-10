@@ -7,7 +7,7 @@ FROM nginx
 RUN rm /etc/nginx/conf.d/default.conf
 
 # 将default.conf复制到指定目录下，用本地的default.conf来替换默认的文件
-ADD nginx.conf /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/conf.d/
 
 # 将根目录下的dist文件夹复制到镜像中
-COPY ./dist/ /usr/share/nginx/html/
+COPY dist/ /usr/share/nginx/html/
