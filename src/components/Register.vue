@@ -127,7 +127,7 @@ export default {
               Toast.warning("您输入的邮箱格式不正确请重新输入");
             } else {
               // 向服务器传递注册数据
-              addUser(account, pwd, email);
+              this.addUser(account, pwd, email);
             }
           }
         }
@@ -144,9 +144,13 @@ export default {
       var result = httpUtil.post(api.apiRegister, bodyData);
       result.then(function(res) {
         var data = res.data;
+        console.log(data);
         if (data.code == 0) {
           // 注册成功，跳转到主页
-          commonMethod.openWindow(that.$router, "Main");
+          Toast.success("注册成功");
+          setTimeout(() => {
+            commonMethod.openWindow(that.$router, "Login");
+          }, 1500);
         } else if (data.code == -302) {
           Toast.warning("用户名已存在，请重新输入");
         } else {

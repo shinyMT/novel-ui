@@ -4,7 +4,7 @@ var apiTest = "http://127.0.0.1:8085"
 // 正式环境
 var apiProd = "http://43.138.212.92:11101"
 
-var envIsProduct = true
+var envIsProduct = false
 
 var sBaseApi = envIsProduct ? apiProd : apiTest
 
