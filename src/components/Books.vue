@@ -50,16 +50,13 @@ export default {
       let that = this;
       // 获取当前的用户id
       var userId = window.sessionStorage.getItem("userId");
-      // 封装待传递的参数
-      var bodyMap = new URLSearchParams();
-      bodyMap.append("userId", userId);
       // 发起post请求
-      var resutl = httpUtil.post(api.apiGetBookList, bodyMap);
+      var resutl = httpUtil.post(api.apiGetBookList + "?userId=" + userId);
       resutl.then(function(res) {
         var data = res.data;
-        console.log(data)
+        console.log(data);
         if (data.code == 0) {
-          that.bookList = data.data;
+          that.bookList = data.result;
         }
       });
     },
@@ -68,11 +65,11 @@ export default {
       const paramsMap = {
         bookPath: bookPath,
         bookId: bookId
-      }
-      commonMethod.openWindow(this.$router, 'BookDetail', paramsMap)
+      };
+      commonMethod.openWindow(this.$router, "BookDetail", paramsMap);
     }
   },
-  created() {
+  mounted() {
     this.getNovelList();
   }
 };

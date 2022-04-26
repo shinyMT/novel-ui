@@ -1,0 +1,49 @@
+.useName {
+    color: #000000;
+  }
+  .userBox {
+    width: 95%;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 1px 5px 5px #cccccc;
+  }
+  .textBox {
+    width: 70%;
+    display: flex;
+    padding: 5px 5px 5px 40px;
+  }
+  .iconBox {
+    width: 29%;
+    display: flex;
+    z-index: 10;
+  }
+  .portrait {
+    width: 80%;
+    height: 95%;
+    border-radius: 50%;
+    margin: 5px 0px 5px 5px;
+  }
+  .portrait img {
+    width: 90%;
+    height: 90%;
+    border-radius: 45%;
+  }
+  .listBox {
+    width: 95%;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 1px 5px 5px #cccccc;
+    text-align: left;
+  }
+  .expandBox {
+    width: 100%;
+    height: 10px;
+  }
+  /* 复写mu-item样式 */
+  .mu-item-title{
+      text-align: left !important;
+  }

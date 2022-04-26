@@ -34,7 +34,9 @@
               <div class="link-area">
                 <a class="linkStyle" id="reg" @click="register">注册账号</a>
                 <span class="spliter"> | </span>
-                <a class="linkStyle" id="forgetPassword" @click="forgetPwd">忘记密码</a>
+                <a class="linkStyle" id="forgetPassword" @click="forgetPwd"
+                  >忘记密码</a
+                >
               </div>
             </div>
           </div>
@@ -53,6 +55,7 @@ import commonMethod from "../assets/js/common";
 import httpUtil from "../assets/js/http_util";
 import api from "../assets/js/api";
 import Toast from "muse-ui-toast";
+import md5 from "js-md5";
 
 // 使用组件
 Vue.use(TextField);
@@ -76,18 +79,16 @@ export default {
   },
   methods: {
     login() {
-      // 获取输入的用户名和密码
-      const account = this.account;
-      const password = this.password;
+      // 定义一个变量暂存this
+      let that = this;
 
-      if (account != null && password != null) {
-        // 将待传递的参数封装为JSON对象
-        let bodyData = new URLSearchParams();
-        bodyData.append("username", account);
-        bodyData.append("password", password);
+      if (this.account != null && this.password != null) {
+        // 将待传递的参数封装为JSON对象，同时对密码进行加密
+        var bodyData = {
+          name: this.account,
+          password: md5(this.password)
+        };
 
-        // 定义一个变量暂存this
-        let that = this;
         var result = httpUtil.post(api.apiLogin, bodyData);
         result.then(function(res) {
           const data = res.data;
@@ -95,13 +96,10 @@ export default {
           if (data.code == 0) {
             Toast.success("登录成功");
             // 将用户信息存入session中
-            window.sessionStorage.setItem("userName", data.data[0].name);
-            window.sessionStorage.setItem("userId", data.data[0].id);
-            // 获取用户id
-            // var userId = data.data[0].id;
+            window.sessionStorage.setItem("userName", data.result.name);
+            window.sessionStorage.setItem("userId", data.result.id);
             // 设置延时跳转
-            clearTimeout(that.timer);
-            that.timer = setTimeout(() => {
+            setTimeout(() => {
               // commonMethod.openWindow(that.$router, "Main", account, userId);
               commonMethod.openWindow(that.$router, "Main");
             }, 2000);
@@ -119,6 +117,9 @@ export default {
       // console.log("点击了忘记密码按钮");
       commonMethod.openWindow(this.$router, "Reset");
     }
+  },
+  mounted() {
+    console.log(md5("admin"));
   }
 };
 </script>

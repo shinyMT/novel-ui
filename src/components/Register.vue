@@ -78,6 +78,7 @@ import httpUtil from "../assets/js/http_util";
 import api from "../assets/js/api";
 import { Snackbar } from "muse-ui";
 import Toast from "muse-ui-toast";
+import md5 from "js-md5";
 
 // 使用组件
 Vue.use(AppBar);
@@ -136,10 +137,12 @@ export default {
     addUser(name, password, email) {
       let that = this;
       // 向服务发起申请添加用户
-      var bodyData = new URLSearchParams();
-      bodyData.append("name", name);
-      bodyData.append("password", password);
-      bodyData.append("email", email);
+      var bodyData = {
+        name: name,
+        password: md5(password),
+        email: email
+      };
+
       // 发起请求
       var result = httpUtil.post(api.apiRegister, bodyData);
       result.then(function(res) {
@@ -151,10 +154,8 @@ export default {
           setTimeout(() => {
             commonMethod.openWindow(that.$router, "Login");
           }, 1500);
-        } else if (data.code == -302) {
-          Toast.warning("用户名已存在，请重新输入");
         } else {
-          Toast.error("注册失败，请稍后重试或联系管理员");
+          Toast.error("注册失败，" + data.message);
         }
       });
     }

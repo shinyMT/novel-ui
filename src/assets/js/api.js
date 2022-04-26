@@ -1,12 +1,6 @@
-// 测试环境
-var apiTest = "http://127.0.0.1:8085"
-
-// 正式环境
-var apiProd = "http://43.138.212.92:11101"
-
-var envIsProduct = false
-
-var sBaseApi = envIsProduct ? apiProd : apiTest
+// 根据当前执行命令选择的环境加载不同地址
+const sBaseApi = process.env.BASE_SERVER_URL
+// console.log("当前环境的地址：" + sBaseApi)
 
 // ------------- 用户相关 -------------
  // 登录
@@ -33,9 +27,11 @@ var sBaseApi = envIsProduct ? apiProd : apiTest
  // 获取当前用户当前书籍的阅读进度
  var apiGetProgress = sBaseApi + "/get/progress"
 
+ // 网络异常代码
+ var NET_WORK_ERROR = -600
+
 
  export default{
-     apiTest,
      sBaseApi,
      apiLogin,
      apiRegister,
@@ -44,5 +40,6 @@ var sBaseApi = envIsProduct ? apiProd : apiTest
      apiGetBook,
      apiGetBookList,
      apiSaveProgress,
-     apiGetProgress
+     apiGetProgress,
+     NET_WORK_ERROR
  }

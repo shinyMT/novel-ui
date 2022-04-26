@@ -1,4 +1,5 @@
 import axios from "axios"
+import api from "./api"
 
 export default{
     // 封装一个get请求方法
@@ -18,7 +19,7 @@ export default{
             result = res
         }).catch(function(reason){
             console.log("网络异常：" + reason)
-            result = -600
+            result = api.NET_WORK_ERROR
         })
 
         return result
@@ -41,7 +42,7 @@ export default{
             result = res
         }).catch(function(reason){
             console.log("网络异常：" + reason)
-            result = -600
+            result = api.NET_WORK_ERROR
         })
 
         return result

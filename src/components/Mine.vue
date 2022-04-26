@@ -4,7 +4,7 @@
     <div class="userBox">
       <!-- 左侧文字 -->
       <div class="textBox">
-        <h1>{{ username }}</h1>
+        <h1 class="userName">{{ username }}</h1>
       </div>
       <!-- 右侧头像 -->
       <div class="iconBox">
@@ -52,6 +52,7 @@ import Vue from "vue";
 import portraitImg from "../assets/img/default_portrait.jpg";
 import Toast from "muse-ui-toast";
 import theme from "muse-ui/lib/theme";
+import "../assets/css/mine.css";
 
 // 使用组件
 Vue.use(List);
@@ -105,49 +106,4 @@ export default {
 };
 </script>
 
-<style>
-h1 {
-  color: #000000;
-}
-.userBox {
-  width: 95%;
-  height: 100px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  border-radius: 10px;
-  box-shadow: 1px 5px 5px #cccccc;
-}
-.textBox {
-  width: 70%;
-  display: flex;
-  padding: 5px 5px 5px 40px;
-}
-.iconBox {
-  width: 29%;
-  display: flex;
-  z-index: 10;
-}
-.portrait {
-  width: 80%;
-  height: 95%;
-  border-radius: 50%;
-  margin: 5px 0px 5px 5px;
-}
-.portrait img {
-  width: 90%;
-  height: 90%;
-  border-radius: 45%;
-}
-.listBox {
-  width: 95%;
-  height: 200px;
-  margin: 0 auto;
-  border-radius: 10px;
-  box-shadow: 1px 5px 5px #cccccc;
-}
-.expandBox {
-  width: 100%;
-  height: 10px;
-}
-</style>
+<style></style>
