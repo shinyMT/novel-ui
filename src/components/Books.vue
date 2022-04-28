@@ -62,11 +62,10 @@ export default {
     },
     // 点击跳转到书籍阅读页
     toBookDetail(bookPath, bookId) {
-      const paramsMap = {
-        bookPath: bookPath,
-        bookId: bookId
-      };
-      commonMethod.openWindow(this.$router, "BookDetail", paramsMap);
+      // 利用session方式存储避免刷新阅读页面时出现数据丢失
+      window.sessionStorage.setItem("bookPath", bookPath);
+      window.sessionStorage.setItem("bookId", bookId);
+      commonMethod.openWindow(this.$router, "BookDetail");
     }
   },
   mounted() {

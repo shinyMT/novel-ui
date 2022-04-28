@@ -116,8 +116,8 @@ export default {
   data() {
     return {
       userId: window.sessionStorage.getItem("userId"),
-      bookId: this.$route.params.bookId,
-      bookPath: this.$route.params.bookPath,
+      bookId: window.sessionStorage.getItem("bookId"),
+      bookPath: window.sessionStorage.getItem("bookPath"),
       // 图书是否可用
       bookIsAvailable: false,
       navigation: {},

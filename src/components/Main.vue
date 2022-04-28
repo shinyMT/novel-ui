@@ -23,29 +23,7 @@
           autocomplete="off"
         />
       </div>
-      <p class="tip">书籍地址</p>
-      <div class="inputBox">
-        <input
-          v-model="bookUrl"
-          id="bookUrl"
-          type="text"
-          class="input-sytle"
-          placeholder="例: https://www.yushubo.com/book_98577"
-          autocomplete="off"
-        />
-      </div>
-      <p class="tip">总章节数</p>
-      <div class="inputBox">
-        <input
-          v-model="totalChapter"
-          id="totalChapter"
-          type="totalChapter"
-          class="input-sytle"
-          placeholder="例: 116"
-          autocomplete="off"
-        />
-      </div>
-    
+
       <div class="mui-content-padded">
         <button id="submitInfo" class="btn-primary" @click="submitInfo">
           提交
@@ -86,8 +64,6 @@ export default {
   },
   data() {
     return {
-      bookUrl: "",
-      totalChapter: "",
       bookName: "",
       bookAuthor: "",
       linear: 0,
@@ -102,24 +78,23 @@ export default {
     submitInfo() {
       let that = this;
       // 获取参数
-      const bookURl = this.bookUrl;
-      const totalChapter = this.totalChapter;
       const bookName = this.bookName;
-      const bookAuthor = this.bookAuthor
-      if (totalChapter != null && bookURl != null && bookName != null) {
-        var bodyData = new URLSearchParams();
-        bodyData.append("totalChapter", totalChapter);
-        bodyData.append("userId", this.userId);
-        bodyData.append("bookName", this.bookName);
-        bodyData.append("bookAuthor", this.bookAuthor);
-        bodyData.append("bookUrl", this.bookUrl);
+      const bookAuthor = this.bookAuthor;
+      if (bookName != null && bookAuthor != null) {
+        var bodyMap = {
+          name: bookName,
+          author: bookAuthor
+        };
         // 发起请求
-        var result = httpUtil.post(api.apiGetBook, bodyData);
+        var result = httpUtil.post(
+          api.apiGetBook + "?userId=" + this.userId,
+          bodyMap
+        );
         // 展示进度条
         that.showProgress = true;
         // 开启进度条计时
         this.progressTimer = setInterval(() => {
-          this.linear += 4;
+          this.linear += 2;
           if (this.linear > 100) {
             this.linear = 0;
           }
@@ -136,9 +111,9 @@ export default {
             var data = res.data;
             if (data.code == 0) {
               Toast.success("获取成功，请到书架中查看");
-            } else if(data.code == -501){
-              Toast.warning("该书籍在书库中已经存在")
-            }else{
+            } else if (data.code == -501) {
+              Toast.warning("该书籍在书库中已经存在");
+            } else {
               Toast.error("获取失败，请稍后重试或者联系管理员");
             }
             // 将进度条拉到100表示获取完毕，1s后再隐藏进度条
@@ -155,8 +130,8 @@ export default {
             }
           }
         });
-      }else{
-        Toast.msgWarn("三个输入框的信息都不能为空");
+      } else {
+        Toast.warning("书名和作者信息不能为空");
       }
     }
   }
